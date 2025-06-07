@@ -1,0 +1,121 @@
+<div class="container mx-auto px-4">
+  <div class="max-w-xl mx-auto p-4 sm:p-10">
+    <!-- Title -->
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold">LORaWAN CONFIGURATION</h2>
+      <p class="text-gray-600 text-lg mt-1">LoRaWAN Configuration Values</p>
+    </div>
+    <hr class="border-gray-300 mb-6" />
+
+    <!-- Form -->
+    <form [formGroup]="loraForm" (ngSubmit)="saveLoraSet()" class="space-y-5">
+      <!-- Switch -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+        <label class="text-gray-700 text-base font-semibold sm:w-1/3 mb-1 sm:mb-0">LoRaWAN :</label>
+        <label class="switch relative inline-block w-12 h-6">
+          <input type="checkbox" formControlName="LRWAN" class="sr-only" />
+          <span class="slider round absolute inset-0 bg-gray-300 rounded-full transition duration-300"></span>
+        </label>
+      </div>
+
+      <!-- Fields visible only if enabled -->
+      <div *ngIf="loraForm.get('LRWAN')?.value" class="space-y-5">
+
+        <!-- Device Address -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+          <label for="DeviAddr" class="text-gray-700 text-base font-semibold sm:w-1/2 mb-1 sm:mb-0">Device Address :</label>
+          <div class="w-full">
+            <input
+              id="DeviAddr"
+              type="text"
+              maxlength="8"
+              formControlName="DeviAddr"
+              (input)="enforceHex($event)"
+              class="w-full bg-gray-200 border-0 rounded-lg px-3 py-2 focus:ring-teal-600 focus:border-teal-600"
+              [ngClass]="{
+                'border border-red-500':
+                  loraForm.get('DeviAddr')?.invalid && loraForm.get('DeviAddr')?.touched
+              }"
+            />
+            <p *ngIf="loraForm.get('DeviAddr')?.invalid && loraForm.get('DeviAddr')?.touched"
+              class="text-red-500 text-sm mt-1">
+              <small *ngIf="loraForm.get('DeviAddr')?.errors?.['pattern']">
+                Invalid input — must be exactly 8 hex characters
+              </small>
+            </p>
+          </div>
+        </div>
+
+        <!-- Network Session Key -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+          <label for="NetwkSesKey" class="text-gray-700 text-base font-semibold sm:w-1/2 mb-1 sm:mb-0">Network session key :</label>
+          <div class="w-full">
+            <input
+              id="NetwkSesKey"
+              type="text"
+              maxlength="32"
+              formControlName="NetwkSesKey"
+              (input)="enforceHex($event)"
+              class="w-full bg-gray-200 border-0 rounded-lg px-3 py-2 focus:ring-teal-600 focus:border-teal-600"
+              [ngClass]="{
+                'border border-red-500':
+                  loraForm.get('NetwkSesKey')?.invalid && loraForm.get('NetwkSesKey')?.touched
+              }"
+            />
+            <p *ngIf="loraForm.get('NetwkSesKey')?.invalid && loraForm.get('NetwkSesKey')?.touched"
+              class="text-red-500 text-sm mt-1">
+              <small *ngIf="loraForm.get('NetwkSesKey')?.errors?.['pattern']">
+                Invalid input — must be exactly 32 hex characters
+              </small>
+            </p>
+          </div>
+        </div>
+
+        <!-- App Session Key -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+          <label for="AppSesKey" class="text-gray-700 text-base font-semibold sm:w-1/2 mb-1 sm:mb-0">App session key :</label>
+          <div class="w-full">
+            <input
+              id="AppSesKey"
+              type="text"
+              maxlength="32"
+              formControlName="AppSesKey"
+              (input)="enforceHex($event)"
+              class="w-full bg-gray-200 border-0 rounded-lg px-3 py-2 focus:ring-teal-600 focus:border-teal-600"
+              [ngClass]="{
+                'border border-red-500':
+                  loraForm.get('AppSesKey')?.invalid && loraForm.get('AppSesKey')?.touched
+              }"
+            />
+            <p *ngIf="loraForm.get('AppSesKey')?.invalid && loraForm.get('AppSesKey')?.touched"
+              class="text-red-500 text-sm mt-1">
+              <small *ngIf="loraForm.get('AppSesKey')?.errors?.['pattern']">
+                Invalid input — must be exactly 32 hex characters
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="border-gray-300" />
+
+      <!-- Submit button -->
+      <div class="flex justify-center">
+        <button
+          type="submit"
+          class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-10 rounded-xl focus:outline-none focus:shadow-outline"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Spinner -->
+  <div
+    class="spinner-overlay fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50"
+    *ngIf="spinnerVisible"
+  >
+    <div class="spinner border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"></div>
+  </div>
+</div>

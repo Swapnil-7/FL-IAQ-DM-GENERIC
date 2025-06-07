@@ -1,0 +1,132 @@
+<div class="container mx-auto px-4 py-6">
+  <div class="flex flex-col flex-auto min-w-0">
+    <div class="flex-auto">
+      <div class="text-center mb-6">
+        <span class="text-2xl sm:text-3xl font-bold">Network SETTING</span>
+        <br />
+        <span class="text-sm sm:text-lg text-gray-600">Network Configuration Values</span>
+      </div>
+
+      <hr class="mb-6 border-gray-300" />
+
+      <!-- Connectivity Buttons -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-center mb-4 space-y-2 sm:space-y-0 sm:space-x-4">
+        <label class="text-gray-700 text-base font-semibold sm:w-1/8">Connectivity :</label>
+        <div class="flex space-x-2">
+          <button (click)="selectWiFi()"
+            [ngClass]="{'bg-teal-600 text-white': selectedNetwork === 1}"
+            class="px-4 py-1 font-semibold text-gray-700 bg-green-50 rounded-lg hover:bg-teal-600 hover:text-white">
+            WiFi
+          </button>
+          <button (click)="select4G()"
+            [ngClass]="{'bg-teal-600 text-white': selectedNetwork === 0}"
+            class="px-4 py-1 font-semibold text-gray-700 bg-green-50 rounded-lg hover:bg-teal-600 hover:text-white">
+            4G
+          </button>
+        </div>
+      </div>
+      <hr class="mb-6 border-gray-300" />
+
+      <!-- WiFi Form -->
+      <form *ngIf="selectedNetwork === 1" [formGroup]="wifiForm" (ngSubmit)="saveWiFiSettings()" class="max-w-xl mx-auto space-y-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
+          <label class="sm:w-1/4 text-gray-700 font-semibold mb-1 sm:mb-0">Network SSID :</label>
+          <input formControlName="ssid" type="text"
+            class="w-full sm:w-3/4 max-w-sm bg-gray-200 rounded-lg px-3 py-2 focus:ring-teal-600 focus:outline-none"
+            placeholder="Enter Network SSID" />
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
+          <label class="sm:w-1/4 text-gray-700 font-semibold mb-1 sm:mb-0">Password :</label>
+          <input formControlName="password" type="password"
+            class="w-full sm:w-3/4 max-w-sm bg-gray-200 rounded-lg px-3 py-2 focus:ring-teal-600 focus:outline-none"
+            placeholder="Enter Password" />
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
+          <label class="sm:w-1/4 text-gray-700 font-semibold mb-1 sm:mb-0">DHCP :</label>
+          <label class="switch relative inline-block w-12 h-6">
+            <input type="checkbox" formControlName="dhcp"
+              class="bg-gray-200 border-0 rounded-lg px-3 py-2 w-full focus:ring-teal-600 focus:border-teal-600" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
+          <label class="sm:w-1/4 text-gray-700 font-semibold mb-1 sm:mb-0">Static IP :</label>
+          <input formControlName="staticIP" type="text"
+            class="w-full sm:w-3/4 max-w-sm bg-gray-200 rounded-lg px-3 py-2 focus:ring-teal-600 focus:outline-none"
+            placeholder="Enter Static IP" />
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
+          <label class="sm:w-1/4 text-gray-700 font-semibold mb-1 sm:mb-0">Gateway IP :</label>
+          <input formControlName="gatewayIP" type="text"
+            class="w-full sm:w-3/4 max-w-sm bg-gray-200 rounded-lg px-3 py-2 focus:ring-teal-600 focus:outline-none"
+            placeholder="Enter Gateway IP" />
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
+          <label class="sm:w-1/4 text-gray-700 font-semibold mb-1 sm:mb-0">Subnet Mask :</label>
+          <input formControlName="subnetMask" type="text"
+            class="w-full sm:w-3/4 max-w-sm bg-gray-200 rounded-lg px-3 py-2 focus:ring-teal-600 focus:outline-none"
+            placeholder="Enter Subnet Mask" />
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
+          <label class="sm:w-1/4 text-gray-700 font-semibold mb-1 sm:mb-0">Primary DNS :</label>
+          <input formControlName="pdns" type="text"
+            class="w-full sm:w-3/4 max-w-sm bg-gray-200 rounded-lg px-3 py-2 focus:ring-teal-600 focus:outline-none"
+            placeholder="Enter Primary DNS" />
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
+          <label class="sm:w-1/4 text-gray-700 font-semibold mb-1 sm:mb-0">Secondary DNS :</label>
+          <input formControlName="sdns" type="text"
+            class="w-full sm:w-3/4 max-w-sm bg-gray-200 rounded-lg px-3 py-2 focus:ring-teal-600 focus:outline-none"
+            placeholder="Enter Secondary DNS" />
+        </div>
+
+        <hr class="mb-6 border-gray-300" />
+
+        <div class="flex justify-center">
+          <button type="submit"
+            class="bg-teal-500 text-white px-8 py-2 rounded-xl hover:bg-teal-600 shadow">
+            Submit
+          </button>
+        </div>
+      </form>
+
+      <!-- 4G Form -->
+      <form *ngIf="selectedNetwork === 0" [formGroup]="wifiForm" (ngSubmit)="saveWiFiSettings()" class="max-w-xl mx-auto space-y-4 mt-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
+          <label class="sm:w-1/4 text-gray-700 font-semibold mb-1 sm:mb-0">Auto APN :</label>
+          <div class="flex space-x-4">
+            <label class="flex items-center">
+              <input type="radio" formControlName="autoApn" [value]="0" class="mr-2" /> Manual
+            </label>
+            <label class="flex items-center">
+              <input type="radio" formControlName="autoApn" [value]="1" class="mr-2" /> Auto
+            </label>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center">
+          <label class="sm:w-1/4 text-gray-700 font-semibold mb-1 sm:mb-0">SIM 1 APN :</label>
+          <input formControlName="sim1Apn" type="text"
+            class="w-full sm:w-3/4 max-w-sm bg-gray-200 rounded-lg px-3 py-2 focus:ring-teal-600 focus:outline-none"
+            placeholder="Enter SIM 1 APN" />
+        </div>
+
+        <hr class="mb-6 border-gray-300" />
+
+        <div class="flex justify-center">
+          <button type="submit"
+            class="bg-teal-500 text-white px-8 py-2 rounded-xl hover:bg-teal-600 shadow">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

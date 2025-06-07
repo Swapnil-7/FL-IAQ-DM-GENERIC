@@ -1,0 +1,127 @@
+<div class="p-4 sm:p-6 md:p-10">
+  <div class="text-center mb-4">
+    <span class="text-2xl font-bold">DEVICE STATUS</span>
+  </div>
+  <hr class="mb-6 border-gray-300" />
+
+  <div class="grid bg-white px-4 py-2 rounded-lg shadow-md gap-4">
+    <!-- Manufacturer -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >Manufacturer :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.Manufacturer
+      }}</span>
+    </div>
+
+    <!-- Device -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >Device :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.Device
+      }}</span>
+    </div>
+
+    <!-- Device ID -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >Device ID :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.DeviceID
+      }}</span>
+    </div>
+
+    <!-- IMEI -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >IMEI :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.IMEI
+      }}</span>
+    </div>
+
+    <!-- WiFi MAC -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >WiFi MAC :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.WiFiMac
+      }}</span>
+    </div>
+
+    <!-- SDK Version -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >SDK Version :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.SDKVersion
+      }}</span>
+    </div>
+
+    <!-- Firmware Name -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >Firmware Name :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.FirmwareName
+      }}</span>
+    </div>
+
+    <!-- Firmware Version -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >Firmware Version :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.FirmwareVersion
+      }}</span>
+    </div>
+
+    <!-- Firmware Build Date -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >Firmware Build Date :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.FirmwareBuildDate
+      }}</span>
+    </div>
+
+    <!-- Network -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >Network :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.Network
+      }}</span>
+    </div>
+
+    <!-- WiFi IP -->
+    <div class="grid grid-cols-12 gap-2">
+      <span class="col-span-4 sm:col-span-3 font-semibold text-gray-800"
+        >WiFi IP :</span
+      >
+      <span class="col-span-8 sm:col-span-9 text-gray-700 break-words">{{
+        deviceStatus?.WiFiIP
+      }}</span>
+    </div>
+  </div>
+
+  <div
+    class="spinner-overlay fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center"
+    *ngIf="spinnerVisible"
+  >
+    <div
+      class="spinner border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"
+    ></div>
+  </div>
+</div>

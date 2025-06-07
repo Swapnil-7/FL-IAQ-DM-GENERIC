@@ -1,0 +1,128 @@
+<div class="container mx-auto px-4 sm:px-6 lg:px-10 py-6">
+  <div class="flex flex-col flex-auto min-w-0">
+    <div class="flex-auto">
+      <!-- Title -->
+      <div class="text-center mb-6">
+        <span class="text-3xl font-bold">MQTT</span>
+      </div>
+      <hr class="border-gray-300 mb-6" />
+
+      <!-- Form Start -->
+      <form [formGroup]="mqttForm" class="space-y-6 max-w-xl mx-auto">
+        <!-- Field Group -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">Enable MQTT:</label>
+          <select class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="enable_mqtt">
+            <option value="0">0: OFF</option>
+            <option value="1">1: Using WiFi</option>
+            <option value="2">2: Using Cellular</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">MQTT Broker:</label>
+          <input type="text" class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="broker" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">MQTT Port:</label>
+          <input type="text" class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="port" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">MQTT User:</label>
+          <input type="text" class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="user" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">MQTT Password:</label>
+          <input type="password" class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="pwd" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">MQTT Client ID:</label>
+          <input type="text" class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="cid" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">MQTT QoS:</label>
+          <select class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="qos">
+            <option value="0">0: At most once</option>
+            <option value="1">1: At least once</option>
+            <option value="2">2: Exactly once</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">MQTT Retain:</label>
+          <div class="flex space-x-6">
+            <label class="flex items-center">
+              <input type="radio" formControlName="retain" [value]="1" class="mr-2" />
+              <span>Yes</span>
+            </label>
+            <label class="flex items-center">
+              <input type="radio" formControlName="retain" [value]="0" class="mr-2" />
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">MQTT Keep Alive:</label>
+          <input type="number" class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="keep_alive" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">Use Secure Connection:</label>
+          <select class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="userSecureConnection">
+            <option value="0">0: No Auth</option>
+            <option value="1">1: Server Only</option>
+            <option value="2">2: Server & Client</option>
+            <option value="3">3: Client Only</option>
+          </select>
+        </div>
+
+        <!-- Certificates -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <label class="text-gray-700 font-semibold">Certificates (PEM):</label>
+          <div class="space-y-2 w-full max-w-md">
+            <input type="file" class="w-full text-gray-600" (change)="onFileChange($event, 'ca')" />
+            <button class="w-full bg-teal-500 text-white py-2 rounded" (click)="downloadFile('ca')">Download CA</button>
+
+            <input type="file" class="w-full text-gray-600" (change)="onFileChange($event, 'crt')" />
+            <button class="w-full bg-teal-500 text-white py-2 rounded" (click)="downloadFile('crt')">Download CRT</button>
+
+            <input type="file" class="w-full text-gray-600" (change)="onFileChange($event, 'key')" />
+            <button class="w-full bg-teal-500 text-white py-2 rounded" (click)="downloadFile('key')">Download Key</button>
+          </div>
+        </div>
+
+        <!-- Topics -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">Data Publish Topic:</label>
+          <input type="text" class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="pubtopic" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">Attribute Publish Topic:</label>
+          <input type="text" class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="attrpubtopic" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+          <label class="text-gray-700 font-semibold">Subscribe Topic:</label>
+          <input type="text" class="bg-gray-200 rounded-lg px-3 py-2 w-full max-w-md focus:ring-teal-600" formControlName="subtopic" />
+        </div>
+         <hr class="border-gray-300 mb-2" />
+        <!-- Submit Button -->
+        <div class="flex justify-center pt-4">
+          <input type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-10 rounded-xl" value="Submit" (click)="saveMqtt()" />
+        </div>
+      </form>
+
+      <!-- Spinner -->
+      <div class="spinner-overlay fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50" *ngIf="spinnerVisible">
+        <div class="spinner border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container mx-auto p-4">
+  <div class="flex flex-col flex-auto min-w-0">
+    <div class="flex-auto p-2 sm:p-6 lg:p-10">
+      
+      <!-- Title -->
+      <div class="text-center mb-4">
+        <span class="text-3xl font-bold block">Sensor Calibration</span>
+        <span class="text-lg text-gray-600 block">Sensor Configuration Values</span>
+      </div>
+      <hr class="border-gray-300 my-4" />
+
+      <!-- Form -->
+      <form [formGroup]="sensorForm" class="w-full max-w-2xl mx-auto space-y-4">
+
+        <!-- Header Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
+          <div class="sm:col-span-2"></div>
+          <div class="sm:col-span-5 text-center font-semibold text-gray-600 text-md">Slop</div>
+          <div class="sm:col-span-5 text-center font-semibold text-gray-600 text-md">Const</div>
+        </div>
+
+        <!-- Sensor Fields -->
+        <div *ngFor="let sensor of sensors" class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+          <!-- Label -->
+          <label class="sm:col-span-2 font-semibold text-gray-700">{{ sensor.label }}:</label>
+
+          <!-- Slop -->
+          <div class="sm:col-span-5">
+            <input
+              type="number"
+              class="w-full bg-gray-200 border-0 rounded-lg px-3 py-2 focus:ring-teal-600 focus:border-teal-600"
+              [formControlName]="sensor.slop"
+              placeholder="Slop"
+            />
+          </div>
+
+          <!-- Const -->
+          <div class="sm:col-span-5">
+            <input
+              type="number"
+              class="w-full bg-gray-200 border-0 rounded-lg px-3 py-2 focus:ring-teal-600 focus:border-teal-600"
+              [formControlName]="sensor.const"
+              placeholder="Const"
+            />
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-center pt-4">
+          <input
+            type="submit"
+            class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-10 rounded-xl focus:outline-none focus:shadow-outline"
+            value="Submit"
+            (click)="saveSensor()"
+          />
+        </div>
+      </form>
+    </div>
+
+    <!-- Spinner -->
+    <div
+      class="spinner-overlay fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50"
+      *ngIf="spinnerVisible"
+    >
+      <div class="spinner border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"></div>
+    </div>
+  </div>
+</div>
